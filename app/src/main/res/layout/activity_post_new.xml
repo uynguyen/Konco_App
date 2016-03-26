@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginRight="10px"
+    android:layout_marginLeft="10px"
+    android:layout_marginTop="10px"
+    android:layout_marginBottom="10px"
+    tools:context="com.example.turbo.konco.PostNewActivity">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <EditText
+                android:paddingLeft="10px"
+                android:paddingRight="10px"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_UserPostTitle"
+                android:layout_weight="1"
+                android:hint="What the fuck?"/>
+
+
+        </LinearLayout>
+
+        <EditText
+            android:layout_marginTop="5px"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_UserPostContent"
+            android:minHeight="300px"
+            android:paddingLeft="10px"
+            android:paddingRight="10px"
+            android:hint="What are you thinking?"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Post"
+            android:background="@android:color/transparent"
+
+            android:id="@+id/btn_UserPost"
+            android:layout_gravity="right" />
+    </LinearLayout>
+
+</RelativeLayout>
