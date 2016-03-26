@@ -6,4 +6,11 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_post">PostActivity</string>
+
+
+    <string name="facebook_app_id">1030708603652873</string>
+    <string name="title_activity_login">LoginActivity</string>
+
+    <string name="com_facebook_loginview_log_in_button_long">Đăng nhập với Facebook</string>
+    <string name="com_facebook_loginview_log_out_button_long">Đăng xuất</string>
 </resources>

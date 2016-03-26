@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.Request;
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.Response;
@@ -15,6 +17,8 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+
+import models.PostItemModel;
 
 /**
  * Created by LeeSan on 3/26/2016.
@@ -39,6 +43,7 @@ public class GetPostAsyncTask extends AsyncTask<Void, CustomNewItems, Void> {
     @Override
     protected Void doInBackground(Void... arg0) {
         Request request = new Request("/api/posts", Request.GET);
+
         request.send(context, new ResponseListener() {
             @Override
             public void onSuccess(Response response) {
@@ -49,15 +54,21 @@ public class GetPostAsyncTask extends AsyncTask<Void, CustomNewItems, Void> {
                     ArrayList<String> tempAvatars = new ArrayList<String>();
                     ArrayList<String> tempContents = new ArrayList<String>();
                     ArrayList<String> tempVotes = new ArrayList<String>();
-                    ArrayList<String> tempComments = new ArrayList<String>();
+                    ArrayList<ArrayList<String>> tempComments = new ArrayList<>();
                     ArrayList<String> tempUsername = new ArrayList<String>();
                     ArrayList<String> tempDatePost = new ArrayList<String>();
+
                     for (int i = 0; i < post_array.length(); i++) {
                         tempNames.add(post_array.getJSONObject(i).getString("title"));
                         tempContents.add(post_array.getJSONObject(i).getString("content"));
                         tempVotes.add(post_array.getJSONObject(i).getString("num_vote"));
                         tempDatePost.add(post_array.getJSONObject(i).getString("datepost"));
-                        tempComments.add(post_array.getJSONObject(i).getJSONArray("Comments").length() + "");
+                        ArrayList<String> cmts = new ArrayList<String>();
+                        for(int j = 0 ; j <post_array.getJSONObject(i).getJSONArray("Comments").length(); j++ ){
+                            cmts.add(post_array.getJSONObject(i).getJSONArray("Comments").getJSONObject(j).getString("content"));
+                        }
+
+                        tempComments.add(cmts);
                         tempAvatars.add(post_array.getJSONObject(i).getJSONObject("User").getString("avatarUrl"));
                         tempUsername.add(post_array.getJSONObject(i).getJSONObject("User").getString("fullname"));
 
@@ -77,7 +88,7 @@ public class GetPostAsyncTask extends AsyncTask<Void, CustomNewItems, Void> {
 
                     Log.d("Myapp", "======================================onSuccess :: " + response.getResponseText());
                 } catch (Exception e) {
-
+                    Log.d("Myapp", "======================================Exception with :: " + e.getMessage());
                 }
 
             }
@@ -103,6 +114,7 @@ public class GetPostAsyncTask extends AsyncTask<Void, CustomNewItems, Void> {
         super.onProgressUpdate(values);
 
         view.setAdapter(values[0]);
+
 
     }
 
