@@ -57,6 +57,7 @@ public class GetPostAsyncTask extends AsyncTask<Void, CustomNewItems, Void> {
                     ArrayList<ArrayList<String>> tempComments = new ArrayList<>();
                     ArrayList<String> tempUsername = new ArrayList<String>();
                     ArrayList<String> tempDatePost = new ArrayList<String>();
+                    ArrayList<Integer> tempindex = new ArrayList<Integer>();
 
                     for (int i = 0; i < post_array.length(); i++) {
                         tempNames.add(post_array.getJSONObject(i).getString("title"));
@@ -71,10 +72,12 @@ public class GetPostAsyncTask extends AsyncTask<Void, CustomNewItems, Void> {
                         tempComments.add(cmts);
                         tempAvatars.add(post_array.getJSONObject(i).getJSONObject("User").getString("avatarUrl"));
                         tempUsername.add(post_array.getJSONObject(i).getJSONObject("User").getString("fullname"));
+                        tempindex.add(Integer.parseInt(post_array.getJSONObject(i).getString("id")));
 
                     }
 
                     CustomNewItems aa = new CustomNewItems(context,
+                            tempindex,
                             tempNames,
                             tempAvatars,
                             tempContents,

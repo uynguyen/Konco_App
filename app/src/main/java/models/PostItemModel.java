@@ -16,9 +16,9 @@ public class PostItemModel implements Serializable {
     private String _content;
     private ArrayList<String> _comments;
     private String _votes;
-    private Bitmap _urlAvatar;
+    private String _urlAvatar;
     public PostItemModel(){}
-    public PostItemModel(String title, String username, Bitmap urlAvatar, Date postDate, String content,
+    public PostItemModel(String title, String username, String urlAvatar, Date postDate, String content,
                          ArrayList<String> comment, String vote){
         this.set_title(title);
         this.set_userName(username);
@@ -78,11 +78,11 @@ public class PostItemModel implements Serializable {
         this._votes = _votes;
     }
 
-    public Bitmap get_urlAvatar() {
+    public String get_urlAvatar() {
         return _urlAvatar;
     }
 
-    public void set_urlAvatar(Bitmap _urlAvatar) {
+    public void set_urlAvatar(String _urlAvatar) {
         this._urlAvatar = _urlAvatar;
     }
 }

@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Konco mang con đến với mẹ ..."
+        android:background="@drawable/slogan"
         android:id="@+id/textView"
         android:textSize="15dp"
         android:layout_below="@+id/progress"

@@ -36,11 +36,13 @@ public class CustomNewItems extends ArrayAdapter {
     private ArrayList<ArrayList<String>> _comments = new ArrayList<>();
     private ArrayList<String> _usernames = new ArrayList<>();
     private ArrayList<String> _datePost = new ArrayList<>();
+    private ArrayList<Integer> _index = new ArrayList<>();
 
-    public CustomNewItems(Context context, ArrayList<String> names, ArrayList<String> avatars,
+    public CustomNewItems(Context context,ArrayList<Integer> index, ArrayList<String> names, ArrayList<String> avatars,
                           ArrayList<String> contents, ArrayList<String> votes, ArrayList<ArrayList<String>> comments,
                           ArrayList<String> usernames, ArrayList<String> datePost) {
         super(context, R.layout.new_row, names);
+        this._index = index;
         this._names = names;
         this._imagesURL = avatars;
         this._contents = contents;
@@ -98,31 +100,10 @@ public class CustomNewItems extends ArrayAdapter {
             @Override
             public void onClick(View view) {
 
-                PostItemModel model = new PostItemModel();
-                TextView name = (TextView) view.findViewById(R.id.txt_nameFriend);
-                model.set_title(name.getText().toString());
-
-                TextView content = (TextView) view.findViewById(R.id.txt_PostContent);
-                model.set_content(content.getText().toString());
-
-                TextView fullname = (TextView) view.findViewById(R.id.txt_nameUser);
-                model.set_userName(fullname.getText().toString());
-
-                TextView date = (TextView) view.findViewById(R.id.txt_datePost);
-                model.set_postDate(new Date());
-
-
-                model.set_userName(fullname.getText().toString());
-                ImageView avatar = (ImageView) view.findViewById(R.id.img_avatarUser);
-                model.set_urlAvatar(((BitmapDrawable) avatar.getDrawable()).getBitmap());
-
-
-                model.set_votes(_votes.get(position));
-                model.set_comments(_comments.get(position));
 
                 Intent i = new Intent(_context, PostItem.class);
 
-                i.putExtra("data", model);
+                i.putExtra("data", _index.get(position));
 
                 _context.startActivity(i);
 
