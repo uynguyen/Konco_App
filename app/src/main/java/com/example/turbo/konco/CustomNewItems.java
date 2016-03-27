@@ -2,7 +2,10 @@ package com.example.turbo.konco;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +20,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import models.PostItemModel;
+
 /**
  * Created by LeeSan on 3/26/2016.
  */
@@ -28,14 +33,16 @@ public class CustomNewItems extends ArrayAdapter {
     private ArrayList<String> _contents;
     private ArrayList<Bitmap> _bitmaps = new ArrayList<>();
     private ArrayList<String> _votes = new ArrayList<>();
-    private ArrayList<String> _comments = new ArrayList<>();
+    private ArrayList<ArrayList<String>> _comments = new ArrayList<>();
     private ArrayList<String> _usernames = new ArrayList<>();
     private ArrayList<String> _datePost = new ArrayList<>();
+    private ArrayList<Integer> _index = new ArrayList<>();
 
-    public CustomNewItems(Context context, ArrayList<String> names, ArrayList<String> avatars,
-                          ArrayList<String> contents, ArrayList<String> votes, ArrayList<String> comments,
+    public CustomNewItems(Context context,ArrayList<Integer> index, ArrayList<String> names, ArrayList<String> avatars,
+                          ArrayList<String> contents, ArrayList<String> votes, ArrayList<ArrayList<String>> comments,
                           ArrayList<String> usernames, ArrayList<String> datePost) {
         super(context, R.layout.new_row, names);
+        this._index = index;
         this._names = names;
         this._imagesURL = avatars;
         this._contents = contents;
@@ -48,7 +55,7 @@ public class CustomNewItems extends ArrayAdapter {
 
 
     @Override
-    public View getView(int position, View view, ViewGroup parent) {
+    public View getView(final int position, View view, ViewGroup parent) {
 
         LayoutInflater inflater = ((Activity) _context).getLayoutInflater();
         View rowView = inflater.inflate(R.layout.new_row, null, true);
@@ -68,7 +75,7 @@ public class CustomNewItems extends ArrayAdapter {
         name.setText(_names.get(position));
 
         TextView content = (TextView) rowView.findViewById(R.id.txt_PostContent);
-        content.setText(_contents.get(position));
+        content.setText(limitContent(_contents.get(position), 250));
 
         TextView fullname = (TextView) rowView.findViewById(R.id.txt_nameUser);
         fullname.setText("Được đăng bởi " +_usernames.get(position));
@@ -87,10 +94,33 @@ public class CustomNewItems extends ArrayAdapter {
         voteButton.setText(_votes.get(position));
 
         Button commentButton = (Button) rowView.findViewById(R.id.btn_comment);
-        commentButton.setText(_votes.get(position));
+        commentButton.setText(_comments.get(position).size() + "");
+
+        rowView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                Intent i = new Intent(_context, PostItem.class);
+
+                i.putExtra("data", _index.get(position));
+
+                _context.startActivity(i);
+
+            }
+        });
 
         return rowView;
     }
 
+    private String limitContent(String text, int limit){
+        String result = "";
+        if (text.length() <= limit) result = text;
+        else
+        {
+          result =  text.substring(0, text.indexOf(" ", limit)) + "...";
+        }
+        return result;
+    }
 
 }

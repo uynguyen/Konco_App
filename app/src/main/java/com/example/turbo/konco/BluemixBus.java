@@ -34,4 +34,14 @@ public class BluemixBus {
 
         return true;
     }
+
+    public JSONObject getPostItem(Integer index) {
+        JSONObject result = new JSONObject();
+
+        GetPostITemAsyncTask asyn = new GetPostITemAsyncTask(_context);
+        asyn.execute(index);
+
+
+        return result;
+    }
 }

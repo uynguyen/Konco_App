@@ -3,23 +3,31 @@
 
     <group android:checkableBehavior="single">
         <item android:id="@+id/nav_login" android:icon="@android:drawable/ic_popup_reminder"
-            android:title="Log in" />
-        <item android:id="@+id/nav_camara" android:icon="@android:drawable/ic_menu_camera"
-            android:title="Import" />
+            android:title="Trang cá nhân" />
+        <item android:id="@+id/nav_camara" android:icon="@android:drawable/ic_menu_edit"
+            android:title="Bài viết" />
         <item android:id="@+id/nav_gallery" android:icon="@android:drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="Thư viện cho mẹ" />
         <item android:id="@+id/nav_slideshow" android:icon="@android:drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item android:id="@+id/nav_manage" android:icon="@android:drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="Thư viện cho bé" />
+        <item android:id="@+id/nav_manage" android:icon="@android:drawable/ic_menu_myplaces"
+            android:title="Mẹo vặt" />
     </group>
 
-    <item android:title="Infor">
+    <item android:title="Bảo mẫu ảo">
+        <menu>
+            <item android:id="@+id/addChild" android:icon="@android:drawable/ic_menu_info_details"
+                android:title="Thêm em bé" />
+
+        </menu>
+    </item>
+
+    <item android:title="Cài đặt">
         <menu>
             <item android:id="@+id/nav_share" android:icon="@android:drawable/ic_menu_info_details"
-                android:title="Pulse" />
+                android:title="Tùy chỉnh" />
             <item android:id="@+id/nav_send" android:icon="@android:drawable/ic_menu_help"
-                android:title="Food" />
+                android:title="Đăng xuất" />
         </menu>
     </item>
 
